@@ -1,0 +1,23 @@
+{
+  "name": "streams",
+  "version": "1.0.0",
+  "description": "",
+  "main": "create_source.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node create_source"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevinGodell/streams.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kevinGodell/streams/issues"
+  },
+  "homepage": "https://github.com/kevinGodell/streams#readme",
+  "devDependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.0.13"
+  }
+}
