@@ -33,16 +33,23 @@ const params = [
     /* use hardware acceleration if available */
     '-hwaccel', 'auto',
     
-    /* use an artificial video input */
-    '-re',
+    /* use the orignial input source */
+    //'-re',
     '-i', `${__dirname}/src/BigBuckBunny63MB.mp4`,
 
     /* set output flags */
     //'-an',
     '-c:a', 'aac',
     '-c:v', 'libx264',
-    '-movflags', '+faststart+frag_keyframe+empty_moov+default_base_moof+omit_tfhd_offset',
-    '-f', 'mp4',
+    //'-movflags', '+faststart+frag_keyframe+empty_moov+default_base_moof+omit_tfhd_offset',
+    //'-f', 'mp4',
+    '-f', 'hls',
+    '-hls_segment_type', 'fmp4',
+    '-hls_time', '1',
+    '-hls_playlist_type', 'vod',
+    //'-hls_segment_filename', 'fmp4',
+    //'-hls_segment_filename', `big_buck_bunny-${fps}fps-${gop}gop-${width}x${height}-${profile}-${level}__`,
+    //'',
     '-vf', `fps=${fps},scale=${width}:${height},format=yuv420p`,
     '-g', gop,
     '-profile:v', profile,
@@ -50,9 +57,10 @@ const params = [
     '-crf', crf,
     '-metadata', `title=big buck bunny ${fps}fps ${gop}gop ${width}x${height} ${profile} ${level}`,
     //'-reset_timestamps', '1',
-    //'-frag_duration', '1000000',//make ffmpeg create segments that are 30 seconds duration
-    //'-min_frag_duration', '1000000',//make ffmpeg create segments that are 30 seconds duration
-    `big_buck_bunny-${fps}fps-${gop}gop-${width}x${height}-${profile}-${level}.mp4`
+    '-frag_duration', '1000000',//make ffmpeg create segments that are 30 seconds duration
+    '-min_frag_duration', '1000000',//make ffmpeg create segments that are 30 seconds duration
+    //`hls-fmp4/big_buck_bunny-${fps}fps-${gop}gop-${width}x${height}-${profile}-${level}.m3u8`
+    `${__dirname}/hls_fmp4/hls.m3u8`
 ];
 
 const ffmpeg = spawn(ffmpegPath, params, {stdio: ['ignore', 'pipe', 'inherit']});
