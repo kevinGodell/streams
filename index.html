@@ -6,29 +6,10 @@
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
 <body>
-<video id="video" controls></video>
-<p>
-    src: <a href="https://kevingodell.github.io/streams/hls_fmp4/hls.m3u8">https://kevingodell.github.io/streams/hls_fmp4/hls.m3u8</a>
-</p>
-<script>
-    var video = document.getElementById('video');
-    if(Hls.isSupported()) {
-        var hls = new Hls();
-        hls.loadSource('hls_fmp4/hls.m3u8');
-        hls.attachMedia(video);
-        hls.on(Hls.Events.MANIFEST_PARSED,function() {
-            video.play();
-        });
-    }
-    // hls.js is not supported on platforms that do not have Media Source Extensions (MSE) enabled.
-    // When the browser has built-in HLS support (check using `canPlayType`), we can provide an HLS manifest (i.e. .m3u8 URL) directly to the video element throught the `src` property.
-    // This is using the built-in support of the plain video element, without using hls.js.
-    else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = 'hls_fmp4/hls.m3u8';
-        video.addEventListener('canplay',function() {
-            video.play();
-        });
-    }
-</script>
+<p><a href="mp4">mp4</a></p>
+<p><a href="hls_fmp4_event">hls fmp4 event</a></p>
+<p><a href="hls_fmp4_vod">hls fmp4 vod</a></p>
+<p><a href="hls_mpegts_event">hls mpegts event</a></p>
+<p><a href="hls_mpegts_vod">hls mpegts vod</a></p>
 </body>
 </html>

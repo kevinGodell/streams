@@ -22,11 +22,11 @@ const width = 1024 * scale;
 
 const height = 576 * scale;
 
-//const segment_type = 'fmp4';//fmp4 mpegts
+const segment_type = 'mpegts';//fmp4 mpegts
 
-//const playlist_type = 'event';//vod event 0(live)
+const playlist_type = 'vod';//vod event 0(live)
 
-const path = `${__dirname}/mp4/big_buck_bunny-${fps}fps-${gop}gop-${width}x${height}-${profile}-${level}.mp4`;
+const path = `${__dirname}/hls_${segment_type}_${playlist_type}/hls.m3u8`;
 
 const params = [
     /* log info to console */
@@ -47,14 +47,14 @@ const params = [
     //'-an',
     '-c:a', 'aac',
     '-c:v', 'libx264',
-    '-movflags', '+faststart+frag_keyframe+empty_moov+default_base_moof+omit_tfhd_offset',
-    '-f', 'mp4',
-    //'-f', 'hls',
+    //'-movflags', '+faststart+frag_keyframe+empty_moov+default_base_moof+omit_tfhd_offset',
+    //'-f', 'mp4',
+    '-f', 'hls',
     //'-hls_segment_type', 'mpegts'
-    //'-hls_segment_type', segment_type,
-    //'-hls_time', '1',
+    '-hls_segment_type', segment_type,
+    '-hls_time', '1',
     //'-hls_playlist_type', '0',
-    //'-hls_playlist_type', playlist_type,
+    '-hls_playlist_type', playlist_type,
     //'-hls_segment_filename', 'fmp4',
     //'-hls_segment_filename', `big_buck_bunny-${fps}fps-${gop}gop-${width}x${height}-${profile}-${level}__`,
     //'',
@@ -67,7 +67,7 @@ const params = [
     //'-reset_timestamps', '1',
     '-frag_duration', '1000000',//make ffmpeg create segments that are 30 seconds duration
     '-min_frag_duration', '1000000',//make ffmpeg create segments that are 30 seconds duration
-    //`mp4/big_buck_bunny-${fps}fps-${gop}gop-${width}x${height}-${profile}-${level}.mp4`
+    //`hls-fmp4/big_buck_bunny-${fps}fps-${gop}gop-${width}x${height}-${profile}-${level}.m3u8`
     path
 ];
 
